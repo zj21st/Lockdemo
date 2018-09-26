@@ -7,13 +7,23 @@ package com.sumancloud.Simu;
  */
 public class SimuServiceRunnable implements Runnable {
 
-  
+	private  SimuService service; 
+    
+    private static SimuServiceRunnable instance;
+    private SimuServiceRunnable() {  
+    	this.service =  new  SimuService();
+    }
+    public static SimuServiceRunnable getInstance(){
+        if(instance==null){
+        	instance=new SimuServiceRunnable();
+
+        }
+        return instance;
+    }  
 
     @Override
     public void run() {
-    	
-    	SimuService s = new SimuService();
-        s.getNumber();
+    	service.getNumber();
     }
 
 }

@@ -2,7 +2,8 @@ package com.sumancloud.Simu;
 
 public class Run {
     public static void main(String[] args) {
-    	SimuServiceRunnable runnable = new SimuServiceRunnable();
+    	
+    	SimuServiceRunnable runnable = SimuServiceRunnable.getInstance();
         
         Thread tr1 = new Thread(runnable, "Õ¾µã1");
         Thread tr2 = new Thread(runnable, "Õ¾µã2");

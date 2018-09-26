@@ -5,39 +5,41 @@ import java.util.concurrent.locks.ReentrantLock;
 public class SimuService {
 
     // 定义锁对象
-    private static Lock lock = new ReentrantLock();
+    private  Lock lock = new ReentrantLock();
     
-    private static SimulDao dao;
+    //用于查看单列模式是否开启
+    private  int count = 0;
     
-    public static SimulDao getDao(){
-        if(dao==null){
-        	dao=new SimulDao();
-        }
-        return dao;
+    private  SimulDao dao;
+    
+     SimuService() {
+    	this.dao = new SimulDao();
     }
-    
 
-    public int getNumber() {
-        while (true) {
+    public void getNumber() {
+    	System.out.println("==========================getNumber()被调用次数:"+count++);
+    	int limit = 0;
+        while (limit<50) {
             try {
+            	
                 // 加锁
             	System.out.println(Thread.currentThread().getName()+ "试图加锁");
                 lock.lock();
             	System.out.println(Thread.currentThread().getName()+ "加锁成功，开始处理业务");
-                int current = SimuService.getDao().getBillNumber();
+                int current = dao.getBillNumber();
                 System.out.println(Thread.currentThread().getName()+ "得到当前单据号"+current);
-                if ( current < 50) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                    	System.out.println(Thread.currentThread().getName()+ "出现异常");         
-                        e.printStackTrace();
-                    }
-                    
-                    System.out.println("---------------------->"+Thread.currentThread().getName()
-                            + "正在生成" + (current++) + "张单据");
-                    SimuService.getDao().setBillNumber(current);
+   
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                	System.out.println(Thread.currentThread().getName()+ "出现异常");         
+                    e.printStackTrace();
                 }
+                
+                System.out.println("---------------------->"+Thread.currentThread().getName()
+                        + "正在生成" + (current++) + "张单据");
+                dao.setBillNumber(current);
+                limit ++;
             } finally {
                 // 释放锁
             	System.out.println(Thread.currentThread().getName()+ "开始释放锁");           	
