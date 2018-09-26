@@ -1,11 +1,11 @@
-package com.sumancloud.service;
+package com.sumancloud.Simu;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class SimuService implements Runnable {
+public class SimuService {
 
     // 定义锁对象
-    private Lock lock = new ReentrantLock();
+    private static Lock lock = new ReentrantLock();
     
     private static SimulDao dao;
     
@@ -17,8 +17,7 @@ public class SimuService implements Runnable {
     }
     
 
-    @Override
-    public void run() {
+    public int getNumber() {
         while (true) {
             try {
                 // 加锁

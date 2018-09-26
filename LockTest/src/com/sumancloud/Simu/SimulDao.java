@@ -1,4 +1,4 @@
-package com.sumancloud.service;
+package com.sumancloud.Simu;
 /**
  * Ä£ÄâDao
  * @author zhoujian

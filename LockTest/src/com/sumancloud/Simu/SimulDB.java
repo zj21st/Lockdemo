@@ -1,4 +1,4 @@
-package com.sumancloud.service;
+package com.sumancloud.Simu;
 
 public class SimulDB {
 	private static int current=1;
