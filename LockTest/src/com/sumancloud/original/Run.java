@@ -1,4 +1,6 @@
-public class RunnableDemo {
+package com.sumancloud.original;
+
+public class Run {
     public static void main(String[] args) {
     	SellTicket str = new SellTicket();
         
